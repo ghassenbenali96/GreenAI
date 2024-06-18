@@ -103,6 +103,9 @@
   font-weight: <weight>;
   font-style: normal;
 }
+.goldText {
+  color: gold;
+}
 /* ButtonContainer */
 .buttonContainer {
   position: absolute;
@@ -114,7 +117,7 @@
 /* 1stButton */
 .button1 {
   background-color: #00c08a;
-  /color: white;
+  color: white;
   border: none;
   padding: 10px 20px;
   margin-right: 10px;
@@ -159,7 +162,7 @@
   background-position: center 42px;
   overflow: hidden;
 }
-
+/* Layout */
 .layout {
   overflow-y: scroll; /* Enable vertical scrolling */
 }

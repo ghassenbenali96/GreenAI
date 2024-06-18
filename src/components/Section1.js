@@ -27,12 +27,15 @@ const Section1 = React.forwardRef((props, ref) => {
         <div className={styles.greenAi}>
           <h1>GreenAi</h1>
           <p className={styles.description}>
-            A blockchain-based app rewarding users with GreenCoins for planting
+            A blockchain-based app rewarding users with{" "}
+            <span className={styles.goldText}> GreenCoins</span> for planting
             trees and reducing carbon emissions, turning eco-friendly actions
             into valuable carbon credits.
           </p>
           <div className={styles.buttonContainer}>
-            <button className={styles.button1}>Learn More</button>
+            <button className={styles.button1} onClick={props.onLearnMoreClick}>
+              Learn More
+            </button>
             <button className={styles.button2}>Get Started</button>
           </div>
         </div>

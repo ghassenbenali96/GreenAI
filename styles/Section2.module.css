@@ -1,0 +1,57 @@
+/* Section */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #ffffff;
+  position: relative;
+}
+/* Title AboutUs */
+.title {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.title h1 {
+  font-size: 2.5rem;
+  color: #a8cd53;
+  font-family: "Playwrite AU VIC", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+/* Description */
+.description {
+  max-width: 800px;
+  text-align: center;
+  color: #5ae4a7;
+  margin-top: 15px;
+  font-family: "Poppins", sans-serif;
+  /* font-weight: 600; */
+  font-style: normal;
+}
+.description p {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.goldText {
+  color: gold;
+}
+/* Illustration */
+.illustration {
+  text-align: center;
+}
+.illustrationImage {
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+}
+.imageWrapper {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 10px;
+}
+/* Layout */
+.layout {
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
