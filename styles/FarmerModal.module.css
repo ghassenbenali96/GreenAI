@@ -107,3 +107,30 @@
 .connectButton:hover {
   background-color: #076b5b;
 }
+.installMetaMaskButton {
+  display: inline-block;
+  background-color: #f6851b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.installMetaMaskButton:hover {
+  background-color: #e27500;
+}
+
+.error {
+  color: red;
+  background-color: #ffe6e6; /* Light red background */
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
