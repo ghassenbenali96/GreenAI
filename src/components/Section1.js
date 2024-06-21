@@ -1,7 +1,19 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import styles from "../../styles/Section1.module.css";
+import Modal from "./Modal";
 
 const Section1 = React.forwardRef((props, ref) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section ref={ref} id="section1" className={styles.section}>
       {/* Top bar with green color */}
@@ -15,8 +27,8 @@ const Section1 = React.forwardRef((props, ref) => {
           <a href="/trading" className={styles.topbarTab}>
             Trading
           </a>
-          <a href="/wallet" className={styles.topbarTab}>
-            Wallet
+          <a href="#" className={styles.topbarTab} onClick={openModal}>
+            Connect
           </a>
           <a href="/contact-us" className={styles.topbarTab}>
             Contact Us
@@ -28,7 +40,7 @@ const Section1 = React.forwardRef((props, ref) => {
           <h1>GreenAi</h1>
           <p className={styles.description}>
             A blockchain-based app rewarding users with{" "}
-            <span className={styles.goldText}> GreenCoins</span> for planting
+            <span className={styles.goldText}>GreenCoins</span> for planting
             trees and reducing carbon emissions, turning eco-friendly actions
             into valuable carbon credits.
           </p>
@@ -36,10 +48,14 @@ const Section1 = React.forwardRef((props, ref) => {
             <button className={styles.button1} onClick={props.onLearnMoreClick}>
               Learn More
             </button>
-            <button className={styles.button2}>Get Started</button>
+            <button className={styles.button2} onClick={openModal}>
+              Get Started
+            </button>
           </div>
         </div>
       </div>
+      {/* Modal */}
+      {isModalOpen && <Modal closeModal={closeModal} />}
     </section>
   );
 });

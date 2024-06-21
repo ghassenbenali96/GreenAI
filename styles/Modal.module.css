@@ -1,0 +1,91 @@
+/* Modal.module.css */
+/* ModalOverlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* GreenAiIconContainer */
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+/* GreenAiIcon */
+.topbarIcon {
+  width: 90px;
+  height: 90px;
+  margin-left: 15px;
+  background-image: url("/images/logo.png");
+  background-size: cover;
+}
+/* ModalContent */
+.modalContent {
+  background: #d9e4d0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  height: 400px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+/* CloseButton */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* ModalTitle */
+.modalTitle {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.card {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 40%;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.subTitle {
+  color: #448201;
+}
+.goldText {
+  color: gold;
+}
+.card:hover {
+  transform: scale(1.09);
+}
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+}
