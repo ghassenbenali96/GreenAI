@@ -1,0 +1,31 @@
+.confirmationModal {
+  background-color: white;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.congratsMessage {
+  color: green;
+  font-size: 1.5rem;
+  padding-bottom: 15px;
+}
+
+.greenText {
+  font-size: 1.2rem;
+}
+
+.darGoldText {
+  color: #b8860b;
+  font-weight: bold;
+}
+
+.goldText {
+  color: #ffd700;
+  font-weight: bold;
+}
+.coinImage {
+  max-width: 38px;
+  display: inline-block;
+  vertical-align: middle;
+}

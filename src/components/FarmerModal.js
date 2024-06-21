@@ -1,7 +1,9 @@
-"use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import styles from "../../styles/FarmerModal.module.css";
+import GreenCoin from "../../build/contracts/GreenCoin.json";
+import { calculateGreenCoins } from "../../utils/calculateGreenCoins";
+import ConfirmMintedCoins from "./ConfirmMintedCoins";
 
 const FarmerModal = ({ returnToMainModal, closeAllModals }) => {
   const [formData, setFormData] = useState({
@@ -9,30 +11,57 @@ const FarmerModal = ({ returnToMainModal, closeAllModals }) => {
     averageDiameter: "",
     averageHeight: "",
   });
-  // Define States to Connect the wallet
+
   const [walletConnected, setWalletConnected] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [metaMaskInstalled, setMetaMaskInstalled] = useState(!!window.ethereum);
-  // Handle Change
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false);
+  const [contractAddress, setContractAddress] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  useEffect(() => {
+    // Check if MetaMask is installed
+    setMetaMaskInstalled(!!window.ethereum);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  // Handle submit form
-  const handleSubmit = (e) => {
+
+  const handleConnectWallet = async () => {
+    if (!metaMaskInstalled) {
+      setErrorMessage("MetaMask is not installed.");
+      return;
+    }
+
+    if (!window.ethereum) {
+      setErrorMessage("MetaMask is not detected.");
+      return;
+    }
+
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      setWalletConnected(true);
+      setErrorMessage("");
+      const userAddress = await signer.getAddress();
+      setContractAddress(userAddress); // Set contract address to user's address
+      console.log("Wallet connected:", userAddress);
+    } catch (error) {
+      console.error("Failed to connect wallet:", error);
+      setErrorMessage("Failed to connect wallet. Please try again.");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!walletConnected) {
       setErrorMessage("Please connect your wallet first.");
       return;
     }
-    // Handle form submission logic
-    console.log(formData);
-    setErrorMessage("");
-    // Further submission logic, e.g., send data to backend or blockchain
-  };
 
-  // Connect the wallet
-  const connectWallet = async () => {
     const { numberOfTrees, averageDiameter, averageHeight } = formData;
 
     if (!numberOfTrees || !averageDiameter || !averageHeight) {
@@ -40,92 +69,170 @@ const FarmerModal = ({ returnToMainModal, closeAllModals }) => {
       return;
     }
 
-    if (window.ethereum) {
-      try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        setWalletConnected(true);
-        setErrorMessage("");
-        console.log("Wallet connected:", await signer.getAddress());
-      } catch (error) {
-        setErrorMessage("Failed to connect wallet. Please try again.");
-      }
-    } else {
-      setMetaMaskInstalled(false);
+    // Perform calculations
+    const greenCoins = calculateGreenCoins(
+      numberOfTrees,
+      averageDiameter,
+      averageHeight
+    );
+
+    // Interact with the smart contract
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      contractAddress,
+      GreenCoin.abi,
+      signer
+    );
+
+    try {
+      const userAddress = await signer.getAddress();
+      const greenCoinsBN = ethers.utils.parseUnits(greenCoins.toString(), 18);
+      const tx = await contract.mint(userAddress, greenCoinsBN);
+      await tx.wait();
+      // console.log("GreenCoins minted:", tx);
+      setShowConfirmation(true);
+      setErrorMessage("");
+    } catch (error) {
+      console.error("Error minting GreenCoins:", error);
+      setErrorMessage("Failed to mint GreenCoins. Please try again.");
     }
   };
+
+  useEffect(() => {
+    let timeout;
+    if (errorMessage) {
+      timeout = setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
+    return () => clearTimeout(timeout);
+  }, [errorMessage]);
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <button className={styles.returnButton} onClick={returnToMainModal}>
-          &larr;
-        </button>
-        <button className={styles.closeButton} onClick={closeAllModals}>
+        {!showConfirmation && (
+          <>
+            <button
+              title="Return"
+              className={styles.returnButton}
+              onClick={returnToMainModal}
+            >
+              &larr;
+            </button>
+          </>
+        )}
+        <button
+          title="Close"
+          className={styles.closeButton}
+          onClick={closeAllModals}
+        >
           &times;
         </button>
-        <h2 className={styles.title}>Hello Friend of Nature 🌱</h2>
-        <p>Please enter your tree information below.</p>
+        {!showConfirmation && (
+          <>
+            <h2 className={styles.title}>Hello Friend of Nature 🌱</h2>
+            <p className={styles.description}>
+              Please enter your tree information below.
+            </p>
+          </>
+        )}
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label className={styles.label}>
-            Number of Trees:
-            <input
-              type="number"
-              name="numberOfTrees"
-              value={formData.numberOfTrees}
-              onChange={handleChange}
-              className={styles.input}
-              required
+        {showConfirmation && (
+          <div>
+            <ConfirmMintedCoins
+              greenCoins={calculateGreenCoins(
+                formData.numberOfTrees,
+                formData.averageDiameter,
+                formData.averageHeight
+              )}
+              closeConfirmation={() => setShowConfirmation(false)}
             />
-          </label>
-          <label className={styles.label}>
-            Average Diameter (cm):
-            <input
-              type="number"
-              name="averageDiameter"
-              value={formData.averageDiameter}
-              onChange={handleChange}
-              className={styles.input}
-              required
-            />
-          </label>
-          <label className={styles.label}>
-            Average Height (m):
-            <input
-              type="number"
-              name="averageHeight"
-              value={formData.averageHeight}
-              onChange={handleChange}
-              className={styles.input}
-              required
-            />
-          </label>
-        </form>
-
-        <div className={styles.buttonContainer}>
-          {metaMaskInstalled ? (
-            <button className={styles.connectButton} onClick={connectWallet}>
-              {walletConnected ? "Wallet Connected" : "Connect Wallet"}
-            </button>
-          ) : (
-            <a
-              className={styles.installMetaMaskButton}
-              href="https://metamask.io/download.html"
-              target="_blank"
-              rel="noopener noreferrer"
+          </div>
+        )}
+        {!showConfirmation && (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <label className={styles.label}>
+              Number of Trees:
+              <input
+                type="number"
+                name="numberOfTrees"
+                value={formData.numberOfTrees}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
+            <label className={styles.label}>
+              Average Diameter (cm):
+              <input
+                type="number"
+                name="averageDiameter"
+                value={formData.averageDiameter}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
+            <label className={styles.label}>
+              Average Height (m):
+              <input
+                type="number"
+                name="averageHeight"
+                value={formData.averageHeight}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </label>
+            {/* <button
+              className={`${styles.connectButton} ${
+                walletConnected ? styles.walletConnected : ""
+              } ${!metaMaskInstalled ? styles.disabled : ""}`}
+              type="button" // Change to type="button" to prevent form submission
+              onClick={walletConnected ? handleSubmit : handleConnectWallet}
+              disabled={!metaMaskInstalled}
             >
-              Install MetaMask
-            </a>
-          )}
-          {/* <button
-            className={styles.submitButton}
-            onClick={handleSubmit}
-            disabled={!walletConnected}
-          >
-            Submit
-          </button> */}
-        </div>
+              {walletConnected ? "Submit" : "Connect Wallet"}
+            </button> */}
+          </form>
+        )}
+        {!showConfirmation && (
+          <div className={styles.buttonContainer}>
+            {!walletConnected && !metaMaskInstalled && (
+              <a
+                className={styles.installMetaMaskButton}
+                href="https://metamask.io/download.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Install MetaMask
+              </a>
+            )}
+
+            {!walletConnected && metaMaskInstalled && (
+              <button
+                className={`${styles.connectButton} ${styles.color1}`}
+                type="button" // Change to type="button" to prevent form submission
+                onClick={handleConnectWallet}
+                disabled={!metaMaskInstalled}
+              >
+                Connect Wallet
+              </button>
+            )}
+
+            {walletConnected && (
+              <button
+                className={`${styles.connectButton} ${styles.color2}`}
+                type="button" // Change to type="button" to prevent form submission
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

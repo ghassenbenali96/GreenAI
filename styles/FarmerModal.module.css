@@ -103,7 +103,6 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
 .connectButton:hover {
   background-color: #076b5b;
 }
@@ -119,18 +118,33 @@
   font-weight: bold;
   transition: background-color 0.3s;
 }
-
 .installMetaMaskButton:hover {
   background-color: #e27500;
 }
-
+.color1 {
+  background-color: #ffbb1c;
+}
+.color1:hover {
+  background-color: #a67b19;
+}
+.color2 {
+  background-color: #0b9586;
+}
 .error {
   color: red;
-  background-color: #ffe6e6; /* Light red background */
+  background-color: #ffe6e6;
   padding: 10px;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
   text-align: center;
   font-size: 0.9rem;
+}
+.congratulations {
+  color: green;
+  background: #e5ffe5;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
 }
