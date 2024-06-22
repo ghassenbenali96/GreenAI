@@ -167,7 +167,3 @@ For support, don't forget to leave a star ⭐️.
 ## ⚖️ License
 
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
-
-## 🔗 Links
-
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/oussama-ben-saayeed/)
