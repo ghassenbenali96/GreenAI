@@ -33,6 +33,10 @@ This guide walks you through the setup, deployment, and interaction with the Gre
 
 ## 🚀 Getting Started
 
+This work was conducted using Google Design Sprint methodology:
+
+- [Miro Board ](https://miro.com/app/board/uXjVK7X8j94=/)
+
 📌 Tip: You can access GreenAI services directly from this link, but first, ensure you've configured the GreenChain by following the 3rd, 4th and 6th parts of the installation guide.
 
 If you prefer to deploy it on your own:
