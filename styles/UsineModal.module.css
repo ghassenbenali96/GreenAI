@@ -2,53 +2,23 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modalContent {
-  background: white;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 100%;
-  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
   text-align: center;
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.checkButton {
-  background-color: #0b9586;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.checkButton:hover {
-  background-color: #076b5b;
+  position: relative;
 }
 
 .returnButton {
@@ -63,6 +33,69 @@
   cursor: pointer;
   font-size: 1rem;
 }
+
 .returnButton:hover {
   color: #076b5b;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #448201;
+  padding-bottom: 10px;
+}
+
+.connectButton {
+  background-color: #ffbb1c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.connectButton:hover {
+  background-color: #a67b19;
+}
+.checkButton {
+  background-color: #0b9586;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkButton:hover {
+  background-color: #076b5b;
+}
+.buttonContainer {
+  margin-top: 20px;
+}
+.error {
+  color: red;
+  background-color: #ffe6e6;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .modalContent {
+    width: 90%;
+  }
 }

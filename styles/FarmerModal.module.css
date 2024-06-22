@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -76,12 +77,45 @@
   border-radius: 4px;
 }
 
-/* .buttonContainer {
+/* styles/FarmerModal.module.css */
+
+.tipContainer {
   display: flex;
-  justify-content: center;
-  gap: 20px; 
-  margin-top: 20px; 
+  align-items: center; /* Align items vertically */
 }
+
+.tip {
+  margin-right: 10px; /* Adjust as needed */
+  font-size: 16px; /* Example font size */
+}
+
+.uploadButton {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 
 .submitButton {
   background-color: #0b9586;
   color: white;
@@ -94,18 +128,6 @@
 .submitButton:hover {
   background-color: #076b5b;
 } */
-
-.connectButton {
-  background-color: #0b9586;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.connectButton:hover {
-  background-color: #076b5b;
-}
 .installMetaMaskButton {
   display: inline-block;
   background-color: #f6851b;
@@ -120,6 +142,18 @@
 }
 .installMetaMaskButton:hover {
   background-color: #e27500;
+}
+.connectButton {
+  background-color: #0b9586;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.connectButton:hover {
+  background-color: #076b5b;
 }
 .color1 {
   background-color: #ffbb1c;

@@ -19,7 +19,7 @@ const Section1 = React.forwardRef((props, ref) => {
       {/* Top bar with green color */}
       <div className={styles.topbar}>
         {/* Content for the top bar  */}
-        <div title="GreenAi" className={styles.topbarIcon}></div>
+        <div title="GreenAI" className={styles.topbarIcon}></div>
         <div className={styles.topbarTabs}>
           <a href="/" className={styles.topbarTab}>
             Home
@@ -37,7 +37,7 @@ const Section1 = React.forwardRef((props, ref) => {
       </div>
       <div className={styles.content}>
         <div className={styles.greenAi}>
-          <h1>GreenAi</h1>
+          <h1>GreenAI</h1>
           <p className={styles.description}>
             A blockchain-based app rewarding users with{" "}
             <span className={styles.goldText}>GreenCoins</span> for planting

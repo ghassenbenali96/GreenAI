@@ -12,7 +12,7 @@ const Section2 = React.forwardRef((props, ref) => {
       <div className={styles.description}>
         <p>
           GreenAi is a web app leveraging blockchain technology to promote
-          environmental sustainability. Farms can earn GreenCoins by planting
+          environmental sustainability. Farmers can earn GreenCoins by planting
           trees and reducing carbon emissions. These{" "}
           <span className={styles.goldText}> GreenCoins</span> can then be sold
           as carbon credits to businesses (usines) seeking to offset their

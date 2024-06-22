@@ -49,7 +49,7 @@ const Modal = ({ closeModal }) => {
                 </p>
               </div>
               <div className={styles.card} onClick={openUsineModal}>
-                <h3 className={styles.subTitle}>Usine</h3>
+                <h3 className={styles.subTitle}>Enterprise</h3>
                 <p>
                   Purchase <span className={styles.goldText}>GreenCoins</span>{" "}
                   to offset your carbon footprint.

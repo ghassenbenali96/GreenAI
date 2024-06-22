@@ -90,7 +90,6 @@ const FarmerModal = ({ returnToMainModal, closeAllModals }) => {
       const greenCoinsBN = ethers.utils.parseUnits(greenCoins.toString(), 18);
       const tx = await contract.mint(userAddress, greenCoinsBN);
       await tx.wait();
-      // console.log("GreenCoins minted:", tx);
       setShowConfirmation(true);
       setErrorMessage("");
     } catch (error) {
@@ -186,52 +185,58 @@ const FarmerModal = ({ returnToMainModal, closeAllModals }) => {
                 required
               />
             </label>
-            {/* <button
-              className={`${styles.connectButton} ${
-                walletConnected ? styles.walletConnected : ""
-              } ${!metaMaskInstalled ? styles.disabled : ""}`}
-              type="button" // Change to type="button" to prevent form submission
-              onClick={walletConnected ? handleSubmit : handleConnectWallet}
-              disabled={!metaMaskInstalled}
-            >
-              {walletConnected ? "Submit" : "Connect Wallet"}
-            </button> */}
+            {/* Upload Photo Tip */}
+            {!showConfirmation && (
+              <div className={styles.tipContainer}>
+                <p className={styles.tip}>
+                  📌 Tip: For further verification, upload an aerial photo of
+                  your farm below.
+                </p>
+                <label htmlFor="uploadPhoto" className={styles.uploadButton}>
+                  <input
+                    type="file"
+                    id="uploadPhoto"
+                    className={styles.fileInput}
+                    disabled
+                  />
+                  <span className={styles.fileInputLabel}>📷</span>
+                </label>
+              </div>
+            )}
+            <div className={styles.buttonContainer}>
+              {!walletConnected && !metaMaskInstalled && (
+                <a
+                  className={styles.installMetaMaskButton}
+                  href="https://metamask.io/download.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Install MetaMask
+                </a>
+              )}
+
+              {!walletConnected && metaMaskInstalled && (
+                <button
+                  className={`${styles.connectButton} ${styles.color1}`}
+                  type="button"
+                  onClick={handleConnectWallet}
+                  disabled={!metaMaskInstalled}
+                >
+                  Connect Wallet
+                </button>
+              )}
+
+              {walletConnected && (
+                <button
+                  className={`${styles.connectButton} ${styles.color2}`}
+                  type="button"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
           </form>
-        )}
-        {!showConfirmation && (
-          <div className={styles.buttonContainer}>
-            {!walletConnected && !metaMaskInstalled && (
-              <a
-                className={styles.installMetaMaskButton}
-                href="https://metamask.io/download.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Install MetaMask
-              </a>
-            )}
-
-            {!walletConnected && metaMaskInstalled && (
-              <button
-                className={`${styles.connectButton} ${styles.color1}`}
-                type="button" // Change to type="button" to prevent form submission
-                onClick={handleConnectWallet}
-                disabled={!metaMaskInstalled}
-              >
-                Connect Wallet
-              </button>
-            )}
-
-            {walletConnected && (
-              <button
-                className={`${styles.connectButton} ${styles.color2}`}
-                type="button" // Change to type="button" to prevent form submission
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            )}
-          </div>
         )}
       </div>
     </div>
