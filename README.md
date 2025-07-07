@@ -25,6 +25,7 @@ This guide walks you through the setup, deployment, and interaction with the Gre
 - **Smart Contract Deployment**: Deploy GreenCoin smart contracts using Truffle.
 - **Connect Wallet**: Connect MetaMask to interact with the application and perform transactions.
 - **Calculate GreenCoins**: Enter tree information to calculate CO2 sequestered and earn GreenCoins.
+- **Visual Tree Verification**: Increase credibility by including an AI-based tree detection and counting system in farmers' fields.
 - **Transaction Handling**: Handle transactions securely using MetaMask integration.
 - **User Interface**: Intuitive UI for seamless interaction and feedback on transactions.
 - **Blockchain Interaction**: View and manage GreenCoin balances across multiple accounts on the blockchain.
@@ -152,21 +153,19 @@ Make sure MetaMask is connected to the correct network (GreenChain) and that the
 
 If transactions fail, check the console for error messages and ensure that you have sufficient ETH for gas fees.
 
-## 📝 Authors
 
-- Github: [@bensaied](https://www.github.com/bensaied)
+## Contributors
 
-## Contributing
-
-Contributions are always welcome!
-
+- [Oussama Ben Saied ](https://www.github.com/bensaied)
 - [Ghassen Ben Ali ](https://github.com/ghassenbenali96)
 - [Walid Bzeouich ](https://github.com/walid354)
 - [Nourhene Ben Reguigua ](https://github.com/BRnourheene)
 
+Any contribution is much welcomed!
+
 ## 💝 Support
 
-For support, don't forget to leave a star ⭐️.
+support this work by leaving a star ⭐️.
 
 ## ⚖️ License
 
